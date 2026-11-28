@@ -1,0 +1,15 @@
+services:
+  postgres-db:
+    image: postgres:15-alpine
+    container_name: sql-empresas-container
+    environment:
+      POSTGRES_USER: emanu
+      POSTGRES_PASSWORD: MiPasswordSeguro123
+      POSTGRES_DB: wikipedia_data
+    ports:
+      - "5432:5432"
+    volumes:
+      # Mapea el script SQL para que se ejecute al iniciar por primera vez
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      # Mapea DIRECTAMENTE el archivo CSV real de tu Proyecto 1
+      - ../P1-Scrap-Wikipedia_Empresa-USA/empresas_usa.csv:/tmp/empresas_usa.csv
